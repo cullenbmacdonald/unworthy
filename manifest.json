@@ -1,6 +1,6 @@
 {
   "name": "Unworthy",
-  "version": "1.0",
+  "version": "1.1",
   "description": "NO MOAR UPWORTHY",
   "permissions": ["tabs", "*://*.facebook.com/*"],
   "manifest_version": 2,
