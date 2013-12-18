@@ -35,6 +35,10 @@
         }
     }
 
+    // Run run run
+    removeArticles()
+
+    // And continue to run every 4 seconds
     setInterval( removeArticles, 4000 )
 
 })( window, document )
