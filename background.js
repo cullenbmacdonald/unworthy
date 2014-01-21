@@ -4,13 +4,19 @@
         "faithit.com",
         "elitedaily.com",
         "upworthy.com",
+        "www.upworthy.com",
         "distractify.com",
         "viralnova.com",
         "twistedsifter.com",
         "knowmore.washingonpost.com",
         "ijreview.com",
         "buzzfeed.com",
+        "www.buzzfeed.com",
         "jolt24.com",
+        "zimbio.com",
+        "totalfratmove.com",
+        "brobible.com",
+        "boredpanda.com",
         "lawlzone.com"
     ],
     removeArticles = function(){
@@ -27,7 +33,7 @@
                 for (y=0; y<blockedURLs.length; y++) {
                     if (text === blockedURLs[ y ] )
                     {
-                        console.log( "Removed an article" )
+                        console.log( "Removed an article from: " + blockedURLs[ y ] )
                         articles[ i ].remove()
                     }
                 }
