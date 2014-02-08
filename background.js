@@ -1,51 +1,31 @@
-(function( window, document ){
+var removeArticles = function( blockedURLs ){
+    var articles = document.querySelectorAll( "._5uch._5jmm._5pat" )
 
-    var blockedURLs = [
-        "faithit.com",
-        "elitedaily.com",
-        "upworthy.com",
-        "www.upworthy.com",
-        "distractify.com",
-        "viralnova.com",
-        "twistedsifter.com",
-        "knowmore.washingonpost.com",
-        "ijreview.com",
-        "buzzfeed.com",
-        "www.buzzfeed.com",
-        "jolt24.com",
-        "zimbio.com",
-        "totalfratmove.com",
-        "brobible.com",
-        "boredpanda.com",
-        "lawlzone.com"
-    ],
-    removeArticles = function(){
-        var articles = document.querySelectorAll( "._5uch._5jmm._5pat" )
+    for (i=0; i<articles.length; i++)
+    {
+        var derp = articles[ i ].querySelectorAll( ".fcg" )
 
-        for (i=0; i<articles.length; i++)
+        for (x=0; x<derp.length; x++)
         {
-            var derp = articles[ i ].querySelectorAll( ".fcg" )
+            var text = derp[ x ].innerText
 
-            for (x=0; x<derp.length; x++)
-            {
-                var text = derp[ x ].innerText
-
-                for (y=0; y<blockedURLs.length; y++) {
-                    if (text === blockedURLs[ y ] )
-                    {
-                        console.log( "Removed an article from: " + blockedURLs[ y ] )
-                        articles[ i ].remove()
-                    }
+            for (y=0; y<blockedURLs.length; y++) {
+                if (text === blockedURLs[ y ] )
+                {
+                    console.log( "Removed an article from: " + blockedURLs[ y ] )
+                    articles[ i ].remove()
                 }
             }
         }
     }
+},
+blockedURLs = []
 
-    // Run run run
-    removeArticles()
-
-    // And continue to run every 4 seconds
-    setInterval( removeArticles, 4000 )
-
-})( window, document )
-
+chrome.extension.onMessage.addListener( function(request, sender, sendResponse) {
+    if (request.event == "removeArticles") {
+        removeArticles( blockedURLs )
+    } else if (request.event == "updateURLs") {
+        blockedURLs = request.urlsToBlock
+        removeArticles( blockedURLs )
+    }
+})
