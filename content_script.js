@@ -1,4 +1,5 @@
 var removeArticles = function( blockedURLs ){
+    console.log( blockedURLs )
     var articles = document.querySelectorAll( "._5uch._5jmm._5pat" )
 
     for (i=0; i<articles.length; i++)
@@ -19,22 +20,18 @@ var removeArticles = function( blockedURLs ){
         }
     }
 },
-blockedURLs = []
+blockedURLs = [],
+startNewInterval = function( blockedURLs ){
+    return setInterval( function(){ removeArticles( blockedURLs ) }, 4000 )
+},
+mainLoop = startNewInterval( [] )
 
-setInterval( function(){ removeArticles( blockedURLs ) }, 4000 )
+chrome.extension.sendMessage( {text:"getBlockedURLs"}, function( reponse ){} )
 
-chrome.extension.sendMessage( {text:"getBlockedURLs"}, function( reponse ) {
-    if (reponse.urlsToBlock == "test") {
+chrome.extension.onMessage.addListener( function( request, sender, sendResponse ) {
+    if (request.event == "updateURLs") {
         blockedURLs = request.urlsToBlock
-        removeArticles( blockedURLs )
-    }
-})
-
-chrome.extension.onMessage.addListener( function(request, sender, sendResponse) {
-    if (request.event == "removeArticles") {
-        removeArticles( blockedURLs )
-    } else if (request.event == "updateURLs") {
-        blockedURLs = request.urlsToBlock
-        removeArticles( blockedURLs )
+        clearInterval( mainLoop )
+        mainLoop = startNewInterval( blockedURLs )
     }
 })
