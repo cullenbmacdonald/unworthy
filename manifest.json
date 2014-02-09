@@ -10,12 +10,12 @@
     "default_popup": "popup.html"
   },
   "background": {
-    "scripts": ["checkIfFacebook.js"]
+    "scripts": ["background.js"]
   },
   "content_scripts": [
     {
       "matches": ["*://*.facebook.com/*"],
-      "js": ["background.js"]
+      "js": ["content_script.js"]
     }
   ]
 }
