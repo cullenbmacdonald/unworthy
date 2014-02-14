@@ -1,23 +1,49 @@
 <html>
-<head>
-<script src="popup.js"></script>
-<style>
-ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-li {
-    margin: 0;
-    padding: 0;
-}
-</style>
-</head>
-<body>
-<input id="unworthy-url" type="text" name="newSite" />
-<input id="deem-unworthy" type="submit" value="add" /><input id="reset" type="reset" />
-<ul id="saved">
+    <head>
+    <style>
 
-</ul>
-</body>
+        body {
+            font-family: "Helvetica", sans-serif;
+            font-size: 12px;
+            height: auto;
+        }
+
+        .main {
+            width: 180px;
+        }
+
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 8px 0px 0px 0px;
+            height: auto;
+        }
+
+        li {
+            margin: 0;
+            padding: 2px 2px 2px 10px;
+            width: 140px;
+        }
+
+        .exit {
+            float: right;
+            color: red;
+            cursor: pointer;
+        }
+
+        #unworthy-url {
+            width: 140px;
+        }
+
+    </style>
+    <script src="popup.js"></script>
+    </head>
+    <body>
+        <div class="main">
+            <img src="unworthy-banner.png">
+            <input id="unworthy-url" type="text" name="newSite" placeholder="Enter URL to block" />
+            <input id="deem-unworthy" type="submit" value="add" /><input id="reset" type="reset" />
+            <ul id="saved"></ul>
+        </div>
+    </body>
 </html
