@@ -1,5 +1,4 @@
 var removeArticles = function( blockedURLs ){
-        console.log( blockedURLs )
         var articles = document.querySelectorAll( "._5uch._5jmm._5pat" )
 
         for (i=0; i<articles.length; i++)
@@ -32,7 +31,6 @@ var removeArticles = function( blockedURLs ){
         "distractify.com",
         "viralnova.com",
         "twistedsifter.com",
-        "knowmore.washingonpost.com",
         "ijreview.com",
         "buzzfeed.com",
         "www.buzzfeed.com",
