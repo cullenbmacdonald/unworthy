@@ -18,6 +18,7 @@ var urlsToBlock = JSON.parse( localStorage.unworthyURLsToBlock ),
     removeItemFromList = function( url ){
         urlsToBlock.splice( urlsToBlock.indexOf( url ), 1 )
         chrome.storage.sync.set( {unworthyURLsToBlock: urlsToBlock} )
+        renderURLsList()
     },
     renderURLsList = function(){
         var list = document.getElementById( "saved" )
@@ -27,17 +28,15 @@ var urlsToBlock = JSON.parse( localStorage.unworthyURLsToBlock ),
         for (i = 0; i < urlsToBlock.length; i++) {
             var urlItem = document.createElement( "li" ),
                 removeItem = document.createElement( "span" )
+                callRemoveWithURL = function( url ){
+                    return function(){ removeItemFromList( url ) }
+                }
 
             urlItem.innerText = urlsToBlock[ i ]
 
             removeItem.innerText = " X "
             removeItem.setAttribute( "class", "exit" )
-            console.log( removeItem )
-            console.log( urlsToBlock[ i ] )
-            removeItem.addEventListener( "click", function(){
-                    removeItemFromList( urlsToBlock[ i ] )
-                    renderURLsList()
-            } )
+            removeItem.addEventListener( "click", callRemoveWithURL( urlsToBlock[ i ] ) )
 
             urlItem.appendChild( removeItem )
             list.appendChild( urlItem )
